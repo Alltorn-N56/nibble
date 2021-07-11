@@ -14,6 +14,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "big_led.h
+
+      bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+    if (res) {
+        set_big_LED_r(led_state.caps_lock ? LED_ON : LED_OFF);
+        // set_bitc_LED(led_state.caps_lock ? LED_DIM : LED_OFF);
+    }
+    return res;
 
 enum layer_names {
   _MA,
@@ -70,6 +79,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
       }
     break;
+      
+}
 
   }
 return true;
